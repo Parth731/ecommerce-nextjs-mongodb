@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import "./LoadingCircle.css";
+import GlobalState from "@/context";
+import Navbar from "@/components/Navbar";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +20,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        {/* <Suspense> */}
+        <GlobalState>
+          <Navbar />
+
+          <main className="flex min-h-screen flex-col mt-[80px]">
+            {children}
+          </main>
+        </GlobalState>
+        {/* </Suspense> */}
+      </body>
     </html>
   );
 }
